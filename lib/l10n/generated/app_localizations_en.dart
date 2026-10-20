@@ -655,4 +655,81 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get searchFailed => 'Search failed';
+
+  @override
+  String get dataSources => 'Data sources (API)';
+
+  @override
+  String get dataSourcesShort => 'Add official WMS / tile / GeoJSON endpoints';
+
+  @override
+  String get dataSourcesHelp =>
+      'Bhulekh and Bhunaksha have no open API, so the app does not scrape them. Add the WMS or tile layer of a government service such as Bhuvan (ISRO), or a department\'s GeoJSON file, using an endpoint you are entitled to use. Every source needs a source note. This list stays on this phone only.';
+
+  @override
+  String get noSources =>
+      'No sources yet. The app never fills in an endpoint for you.';
+
+  @override
+  String get addSource => 'Add source';
+
+  @override
+  String get sourceType => 'Type';
+
+  @override
+  String get kindWms => 'WMS map layer';
+
+  @override
+  String get kindXyz => 'Tile (XYZ) layer';
+
+  @override
+  String get kindZones => 'Zones GeoJSON (URL)';
+
+  @override
+  String get kindOverlays => 'Metro / road / acquisition GeoJSON (URL)';
+
+  @override
+  String get tileUrl => 'Tile URL (with z, x and y placeholders)';
+
+  @override
+  String get endpointUrl => 'Endpoint URL';
+
+  @override
+  String get wmsLayers => 'WMS layer names (comma separated)';
+
+  @override
+  String get headerName => 'Header name (optional, e.g. Authorization)';
+
+  @override
+  String get headerValue => 'Header value / token';
+
+  @override
+  String get needHttps => 'Only https:// URLs are accepted';
+
+  @override
+  String get needTemplate => 'The URL must contain the z, x and y placeholders';
+
+  @override
+  String get invalidUrl => 'That URL is not valid';
+
+  @override
+  String get fetchNow => 'Download now';
+
+  @override
+  String get fetchDone => 'Downloaded';
+
+  @override
+  String get fetchFailed => 'Download failed';
+
+  @override
+  String get village => 'Village';
+
+  @override
+  String get tehsil => 'Tehsil';
+
+  @override
+  String get copyForBhulekh => 'Copy details for Bhulekh';
+
+  @override
+  String get copied => 'Copied; paste it on Bhulekh';
 }

@@ -12,6 +12,8 @@ class Plot {
     required this.lat,
     required this.lng,
     this.khasraNo = '',
+    this.village = '',
+    this.tehsil = '',
     required this.area,
     required this.areaUnit,
     required this.ratePerUnit,
@@ -26,7 +28,7 @@ class Plot {
     this.watch = false,
   });
 
-  final String id, location, khasraNo, riskNote, source, updatedOn, ruleId;
+  final String id, location, khasraNo, riskNote, source, updatedOn, ruleId, village, tehsil;
   final double lat, lng, area, ratePerUnit;
   final AreaUnit areaUnit, rateUnit;
   final PlotStatus status;
@@ -40,7 +42,7 @@ class Plot {
 
   Plot copyWith({bool? favourite, bool? watch}) => Plot(
         id: id, location: location, lat: lat, lng: lng, khasraNo: khasraNo,
-        area: area, areaUnit: areaUnit, ratePerUnit: ratePerUnit,
+        village: village, tehsil: tehsil, area: area, areaUnit: areaUnit, ratePerUnit: ratePerUnit,
         rateUnit: rateUnit, ruleId: ruleId, status: status, riskNote: riskNote,
         source: source, updatedOn: updatedOn, isDemo: isDemo,
         favourite: favourite ?? this.favourite, watch: watch ?? this.watch,
@@ -48,7 +50,7 @@ class Plot {
 
   Map<String, dynamic> toJson() => {
         'id': id, 'location': location, 'lat': lat, 'lng': lng,
-        'khasra_no': khasraNo, 'area': area, 'area_unit': areaUnit.name,
+        'khasra_no': khasraNo, 'village': village, 'tehsil': tehsil, 'area': area, 'area_unit': areaUnit.name,
         'rate_per_unit': ratePerUnit, 'rate_unit': rateUnit.name,
         'rule_id': ruleId, 'status': status.name, 'risk_note': riskNote,
         'source': source, 'updated_on': updatedOn, 'is_demo': isDemo,
@@ -58,7 +60,7 @@ class Plot {
   factory Plot.fromJson(Map<String, dynamic> j) => Plot(
         id: j['id'], location: j['location'],
         lat: (j['lat'] as num).toDouble(), lng: (j['lng'] as num).toDouble(),
-        khasraNo: j['khasra_no'] ?? '', area: (j['area'] as num).toDouble(),
+        khasraNo: j['khasra_no'] ?? '', village: j['village'] ?? '', tehsil: j['tehsil'] ?? '', area: (j['area'] as num).toDouble(),
         areaUnit: _unit(j['area_unit']),
         ratePerUnit: (j['rate_per_unit'] as num).toDouble(),
         rateUnit: _unit(j['rate_unit']), ruleId: j['rule_id'],

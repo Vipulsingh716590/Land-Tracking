@@ -17,7 +17,7 @@ class CsvImportResult {
 }
 
 const csvColumns = [
-  'location', 'lat', 'lng', 'khasra_no', 'area', 'area_unit', 'rate_per_unit',
+  'location', 'lat', 'lng', 'khasra_no', 'village', 'tehsil', 'area', 'area_unit', 'rate_per_unit',
   'rate_unit', 'district', 'status', 'risk_note', 'source', 'updated_on',
 ];
 
@@ -65,7 +65,7 @@ CsvImportResult parsePlotsCsv(String text, List<UnitRule> rules, String today) {
     };
     plots.add(Plot(
       id: 'csv-$stamp-$i', location: g('location'), lat: lat, lng: lng,
-      khasraNo: g('khasra_no'), area: area, areaUnit: au, ratePerUnit: rate,
+      khasraNo: g('khasra_no'), village: g('village'), tehsil: g('tehsil'), area: area, areaUnit: au, ratePerUnit: rate,
       rateUnit: ru, ruleId: rule.id, status: status, riskNote: g('risk_note'),
       source: g('source'),
       updatedOn: g('updated_on').isEmpty ? today : g('updated_on'),

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/widgets/language_toggle.dart';
 import '../../l10n/generated/app_localizations.dart';
+import '../sources/data_sources_screen.dart';
 import 'data_tools.dart';
 import '../backup/backup_service.dart';
 import '../sync/members_screen.dart';
@@ -101,6 +102,13 @@ class SettingsScreen extends ConsumerWidget {
       const Divider(),
       Text(t.realData, style: Theme.of(context).textTheme.titleMedium),
       Text(t.realDataHelp, style: Theme.of(context).textTheme.bodySmall),
+      ListTile(
+        contentPadding: EdgeInsets.zero,
+        leading: const Icon(Icons.hub),
+        title: Text(t.dataSources),
+        subtitle: Text(t.dataSourcesShort),
+        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const DataSourcesScreen())),
+      ),
       ListTile(
         contentPadding: EdgeInsets.zero,
         leading: const Icon(Icons.layers),

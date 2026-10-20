@@ -43,6 +43,8 @@ class _PlotFormState extends ConsumerState<PlotForm> {
     _c('lat', (p?.lat ?? widget.lat)?.toString());
     _c('lng', (p?.lng ?? widget.lng)?.toString());
     _c('khasra', p?.khasraNo);
+    _c('village', p?.village);
+    _c('tehsil', p?.tehsil);
     _c('area', p?.area.toString());
     _c('rate', p?.ratePerUnit.toString());
     _c('risk', p?.riskNote);
@@ -128,7 +130,7 @@ class _PlotFormState extends ConsumerState<PlotForm> {
     String v(String k) => c[k]!.text.trim();
     ref.read(plotsProvider.notifier).upsert(Plot(
           id: id, location: v('location'), lat: double.parse(v('lat')),
-          lng: double.parse(v('lng')), khasraNo: v('khasra'),
+          lng: double.parse(v('lng')), khasraNo: v('khasra'), village: v('village'), tehsil: v('tehsil'),
           area: double.parse(v('area')), areaUnit: areaUnit,
           ratePerUnit: double.parse(v('rate')), rateUnit: rateUnit,
           ruleId: ruleId, status: status, riskNote: v('risk'),
@@ -182,6 +184,11 @@ class _PlotFormState extends ConsumerState<PlotForm> {
             Expanded(child: _f('lng', t.longitude, v: _lng, num: true)),
           ]),
           _f('khasra', t.khasraNo),
+          Row(children: [
+            Expanded(child: _f('village', t.village)),
+            const SizedBox(width: 8),
+            Expanded(child: _f('tehsil', t.tehsil)),
+          ]),
           DropdownButtonFormField<String>(
             initialValue: ruleId, isExpanded: true,
             decoration: InputDecoration(labelText: t.district),

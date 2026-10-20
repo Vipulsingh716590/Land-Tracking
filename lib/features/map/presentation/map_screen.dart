@@ -17,6 +17,8 @@ import '../../calculator/data/unit_rules_repository.dart';
 import '../../settings/settings_controller.dart';
 import '../data/zones_repository.dart';
 import '../../osm/osm_repository.dart';
+import '../../sources/data_source.dart';
+import '../../sources/data_sources_repository.dart';
 import '../../osm/osm_way.dart';
 import '../domain/acquisition_risk.dart';
 import '../domain/overlay.dart';
@@ -213,6 +215,7 @@ class _MapScreenState extends ConsumerState<MapScreen> {
               borderStrokeWidth: 3,
             ),
         ];
+        final rasterSources = [for (final x in ref.watch(dataSourcesProvider)) if (x.isRaster && x.enabled) x];
         final legend = {for (final z in zones) z.type(lang): z.colour};
 
         return Stack(children: [
@@ -235,6 +238,24 @@ class _MapScreenState extends ConsumerState<MapScreen> {
                 userAgentPackageName: 'com.example.ayodhya_zameen',
                 maxNativeZoom: 19,
               ),
+              for (final src in rasterSources)
+                Opacity(
+                  opacity: 0.75,
+                  child: src.kind == SourceKind.wms
+                      ? TileLayer(
+                          wmsOptions: WMSTileLayerOptions(
+                            baseUrl: src.url.contains('?') ? src.url : '${src.url}?',
+                            layers: splitLayers(src.layers),
+                          ),
+                          tileProvider: NetworkTileProvider(headers: src.headers),
+                          userAgentPackageName: 'com.example.ayodhya_zameen',
+                        )
+                      : TileLayer(
+                          urlTemplate: src.url,
+                          tileProvider: NetworkTileProvider(headers: src.headers),
+                          userAgentPackageName: 'com.example.ayodhya_zameen',
+                        ),
+                ),
               PolygonLayer(polygons: [...zonePolygons, ...acqPolygons]),
               PolylineLayer(polylines: [...osmLines, ...overlayLines]),
               CircleLayer(circles: circles),
@@ -279,6 +300,14 @@ class _MapScreenState extends ConsumerState<MapScreen> {
                       selected: osmOn,
                       onSelected: (_) => ref.read(osmVisibleProvider.notifier).toggle(),
                     ),
+                    for (final src in ref.watch(dataSourcesProvider).where((x) => x.isRaster))
+                      FilterChip(
+                        visualDensity: VisualDensity.compact,
+                        avatar: const Icon(Icons.layers, size: 14),
+                        label: Text(src.name),
+                        selected: src.enabled,
+                        onSelected: (v) => ref.read(dataSourcesProvider.notifier).setEnabled(src.id, v),
+                      ),
                     for (final k in OverlayKind.values)
                       FilterChip(
                         visualDensity: VisualDensity.compact,

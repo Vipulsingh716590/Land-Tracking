@@ -81,3 +81,15 @@ Keep each end segment much longer than the corridor reach times tan(angle).
 - **No open API exists** for the ADA master plan, IGRSUP circle rates or Bhulekh/Bhunaksha (login/captcha),
   and the app does not scrape them. Read them from the official sites, then use Settings →
   Real data to import zones and overlay GeoJSON, import plots by CSV, and "Remove all DEMO records".
+
+## Data sources (dynamic APIs)
+Settings → Data sources (API) lets you add endpoints at run time, with no code change:
+- **WMS or XYZ tile layer** (for example a Bhuvan/NRSC OGC layer): drawn on the map, toggled by a chip.
+- **GeoJSON URL for zones or for metro/road/acquisition lines**: "Download now" replaces the map's zones or overlays
+  after the file parses cleanly.
+Every source needs `https://` and a source note. The app ships no endpoint it has not verified; get the exact WMS
+URL and layer names from the service's GetCapabilities. Optional header (e.g. `Authorization`) is stored on this
+phone only and is excluded from backups and Supabase sync.
+Bhulekh and Bhunaksha publish no open API (captcha / web viewer), so they are not scraped. Plot cards copy
+district / tehsil / village / khasra to the clipboard and open the official site; NIC Uttar Pradesh is the contact
+for an official Bhulekh data API.

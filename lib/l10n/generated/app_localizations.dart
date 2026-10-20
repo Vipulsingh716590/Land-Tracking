@@ -1327,6 +1327,156 @@ abstract class AppLocalizations {
   /// In hi, this message translates to:
   /// **'खोज नहीं हो सकी'**
   String get searchFailed;
+
+  /// No description provided for @dataSources.
+  ///
+  /// In hi, this message translates to:
+  /// **'डेटा स्रोत (API)'**
+  String get dataSources;
+
+  /// No description provided for @dataSourcesShort.
+  ///
+  /// In hi, this message translates to:
+  /// **'आधिकारिक WMS/टाइल/GeoJSON endpoint जोड़ें'**
+  String get dataSourcesShort;
+
+  /// No description provided for @dataSourcesHelp.
+  ///
+  /// In hi, this message translates to:
+  /// **'भूलेख और भूनक्शा का कोई खुला API नहीं है, इसलिए ऐप उन्हें स्क्रैप नहीं करता। भुवन (ISRO) जैसी सरकारी सेवाओं के WMS/टाइल लेयर या किसी विभाग की GeoJSON फ़ाइल का वह endpoint यहाँ जोड़ें जिसे इस्तेमाल करने का आपको अधिकार है। हर स्रोत के साथ उसका स्रोत-टिप्पणी देना ज़रूरी है। यह सूची केवल इसी फ़ोन में रहती है।'**
+  String get dataSourcesHelp;
+
+  /// No description provided for @noSources.
+  ///
+  /// In hi, this message translates to:
+  /// **'अभी कोई स्रोत नहीं जोड़ा गया है। ऐप कोई endpoint अपनी ओर से नहीं भरता।'**
+  String get noSources;
+
+  /// No description provided for @addSource.
+  ///
+  /// In hi, this message translates to:
+  /// **'स्रोत जोड़ें'**
+  String get addSource;
+
+  /// No description provided for @sourceType.
+  ///
+  /// In hi, this message translates to:
+  /// **'प्रकार'**
+  String get sourceType;
+
+  /// No description provided for @kindWms.
+  ///
+  /// In hi, this message translates to:
+  /// **'WMS नक्शा-परत'**
+  String get kindWms;
+
+  /// No description provided for @kindXyz.
+  ///
+  /// In hi, this message translates to:
+  /// **'टाइल (XYZ) परत'**
+  String get kindXyz;
+
+  /// No description provided for @kindZones.
+  ///
+  /// In hi, this message translates to:
+  /// **'ज़ोन GeoJSON (URL)'**
+  String get kindZones;
+
+  /// No description provided for @kindOverlays.
+  ///
+  /// In hi, this message translates to:
+  /// **'मेट्रो/सड़क/अधिग्रहण GeoJSON (URL)'**
+  String get kindOverlays;
+
+  /// No description provided for @tileUrl.
+  ///
+  /// In hi, this message translates to:
+  /// **'टाइल URL (जिसमें z, x और y के स्थान हों)'**
+  String get tileUrl;
+
+  /// No description provided for @endpointUrl.
+  ///
+  /// In hi, this message translates to:
+  /// **'endpoint URL'**
+  String get endpointUrl;
+
+  /// No description provided for @wmsLayers.
+  ///
+  /// In hi, this message translates to:
+  /// **'WMS परत के नाम (कॉमा से अलग)'**
+  String get wmsLayers;
+
+  /// No description provided for @headerName.
+  ///
+  /// In hi, this message translates to:
+  /// **'हेडर का नाम (वैकल्पिक, जैसे Authorization)'**
+  String get headerName;
+
+  /// No description provided for @headerValue.
+  ///
+  /// In hi, this message translates to:
+  /// **'हेडर का मान / टोकन'**
+  String get headerValue;
+
+  /// No description provided for @needHttps.
+  ///
+  /// In hi, this message translates to:
+  /// **'केवल https:// URL मान्य है'**
+  String get needHttps;
+
+  /// No description provided for @needTemplate.
+  ///
+  /// In hi, this message translates to:
+  /// **'URL में z, x और y के स्थान होने चाहिए (जैसे .../z/x/y.png)'**
+  String get needTemplate;
+
+  /// No description provided for @invalidUrl.
+  ///
+  /// In hi, this message translates to:
+  /// **'URL सही नहीं है'**
+  String get invalidUrl;
+
+  /// No description provided for @fetchNow.
+  ///
+  /// In hi, this message translates to:
+  /// **'अभी डाउनलोड करें'**
+  String get fetchNow;
+
+  /// No description provided for @fetchDone.
+  ///
+  /// In hi, this message translates to:
+  /// **'डाउनलोड हो गया'**
+  String get fetchDone;
+
+  /// No description provided for @fetchFailed.
+  ///
+  /// In hi, this message translates to:
+  /// **'डाउनलोड नहीं हुआ'**
+  String get fetchFailed;
+
+  /// No description provided for @village.
+  ///
+  /// In hi, this message translates to:
+  /// **'गाँव'**
+  String get village;
+
+  /// No description provided for @tehsil.
+  ///
+  /// In hi, this message translates to:
+  /// **'तहसील'**
+  String get tehsil;
+
+  /// No description provided for @copyForBhulekh.
+  ///
+  /// In hi, this message translates to:
+  /// **'भूलेख के लिए विवरण कॉपी करें'**
+  String get copyForBhulekh;
+
+  /// No description provided for @copied.
+  ///
+  /// In hi, this message translates to:
+  /// **'कॉपी हो गया; भूलेख में चिपकाएँ'**
+  String get copied;
 }
 
 class _AppLocalizationsDelegate

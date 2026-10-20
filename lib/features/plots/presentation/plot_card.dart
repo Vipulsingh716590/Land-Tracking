@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show Clipboard, ClipboardData;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -86,6 +87,8 @@ class PlotCard extends ConsumerWidget {
       ]),
       row(t.status, statusLabel(t, plot.status)),
       row(t.khasraNo, plot.khasraNo),
+      row(t.village, plot.village),
+      row(t.tehsil, plot.tehsil),
       row(t.area, '${fmt(plot.area)} ${unitLabel(t, plot.areaUnit)}${plot.areaUnit == AreaUnit.sqft ? '' : '  (${fmt(plot.sqft(rule))} ${t.unit_sqft})'}'),
       row(t.ratePerUnit, '₹ ${fmt(plot.ratePerUnit)} / ${unitLabel(t, plot.rateUnit)}'),
       row(t.totalPrice, '₹ ${fmt(plot.totalPrice(rule))}'),
@@ -133,6 +136,16 @@ class PlotCard extends ConsumerWidget {
       row(t.lastUpdated, plot.updatedOn),
       const SizedBox(height: 8),
       Wrap(spacing: 8, children: [
+        OutlinedButton.icon(
+          icon: const Icon(Icons.copy), label: Text(t.copyForBhulekh),
+          onPressed: () async {
+            final rule0 = rule.district;
+            await Clipboard.setData(ClipboardData(
+                text: '${t.district}: $rule0\n${t.tehsil}: ${plot.tehsil}\n${t.village}: ${plot.village}\n${t.khasraNo}: ${plot.khasraNo}'));
+            if (context.mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(t.copied)));
+            }
+          }),
         OutlinedButton.icon(
           icon: const Icon(Icons.open_in_new), label: Text(t.openBhulekh),
           onPressed: () => _open(bhulekhUrl)),

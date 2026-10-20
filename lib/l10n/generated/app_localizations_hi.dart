@@ -652,4 +652,82 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get searchFailed => 'खोज नहीं हो सकी';
+
+  @override
+  String get dataSources => 'डेटा स्रोत (API)';
+
+  @override
+  String get dataSourcesShort => 'आधिकारिक WMS/टाइल/GeoJSON endpoint जोड़ें';
+
+  @override
+  String get dataSourcesHelp =>
+      'भूलेख और भूनक्शा का कोई खुला API नहीं है, इसलिए ऐप उन्हें स्क्रैप नहीं करता। भुवन (ISRO) जैसी सरकारी सेवाओं के WMS/टाइल लेयर या किसी विभाग की GeoJSON फ़ाइल का वह endpoint यहाँ जोड़ें जिसे इस्तेमाल करने का आपको अधिकार है। हर स्रोत के साथ उसका स्रोत-टिप्पणी देना ज़रूरी है। यह सूची केवल इसी फ़ोन में रहती है।';
+
+  @override
+  String get noSources =>
+      'अभी कोई स्रोत नहीं जोड़ा गया है। ऐप कोई endpoint अपनी ओर से नहीं भरता।';
+
+  @override
+  String get addSource => 'स्रोत जोड़ें';
+
+  @override
+  String get sourceType => 'प्रकार';
+
+  @override
+  String get kindWms => 'WMS नक्शा-परत';
+
+  @override
+  String get kindXyz => 'टाइल (XYZ) परत';
+
+  @override
+  String get kindZones => 'ज़ोन GeoJSON (URL)';
+
+  @override
+  String get kindOverlays => 'मेट्रो/सड़क/अधिग्रहण GeoJSON (URL)';
+
+  @override
+  String get tileUrl => 'टाइल URL (जिसमें z, x और y के स्थान हों)';
+
+  @override
+  String get endpointUrl => 'endpoint URL';
+
+  @override
+  String get wmsLayers => 'WMS परत के नाम (कॉमा से अलग)';
+
+  @override
+  String get headerName => 'हेडर का नाम (वैकल्पिक, जैसे Authorization)';
+
+  @override
+  String get headerValue => 'हेडर का मान / टोकन';
+
+  @override
+  String get needHttps => 'केवल https:// URL मान्य है';
+
+  @override
+  String get needTemplate =>
+      'URL में z, x और y के स्थान होने चाहिए (जैसे .../z/x/y.png)';
+
+  @override
+  String get invalidUrl => 'URL सही नहीं है';
+
+  @override
+  String get fetchNow => 'अभी डाउनलोड करें';
+
+  @override
+  String get fetchDone => 'डाउनलोड हो गया';
+
+  @override
+  String get fetchFailed => 'डाउनलोड नहीं हुआ';
+
+  @override
+  String get village => 'गाँव';
+
+  @override
+  String get tehsil => 'तहसील';
+
+  @override
+  String get copyForBhulekh => 'भूलेख के लिए विवरण कॉपी करें';
+
+  @override
+  String get copied => 'कॉपी हो गया; भूलेख में चिपकाएँ';
 }
