@@ -1,0 +1,267 @@
+{
+  "@@locale": "hi",
+  "appTitle": "अयोध्या ज़मीन",
+  "welcomeTitle": "स्वागत है",
+  "welcomeSubtitle": "अयोध्या की ज़मीन का आपका निजी हिसाब-किताब",
+  "chooseLanguage": "भाषा चुनें",
+  "continueBtn": "आगे बढ़ें",
+  "home": "होम",
+  "calculator": "कैलकुलेटर",
+  "settings": "सेटिंग्स",
+  "map": "नक्शा",
+  "plots": "प्लॉट",
+  "diary": "डायरी",
+  "comingSoon": "जल्द आ रहा है",
+  "language": "भाषा",
+  "darkMode": "डार्क मोड",
+  "district": "ज़िला",
+  "value": "मान",
+  "fromUnit": "इस इकाई से",
+  "results": "परिणाम",
+  "formula": "सूत्र",
+  "source": "स्रोत",
+  "lastUpdated": "आख़िरी अपडेट",
+  "demo": "डेमो",
+  "unverified": "अपुष्ट — कृपया खुद जाँचें",
+  "ratePerUnit": "दर (प्रति इकाई)",
+  "rateUnit": "दर की इकाई",
+  "totalPrice": "कुल कीमत",
+  "unitRules": "इकाई नियम",
+  "editRule": "नियम बदलें",
+  "addRule": "नियम जोड़ें",
+  "deleteRule": "नियम हटाएँ",
+  "save": "सहेजें",
+  "cancel": "रद्द करें",
+  "biswaPerBigha": "बीघा में बिस्वा",
+  "biswansiPerBiswa": "बिस्वा में बिस्वांसी",
+  "sqftPerBiswa": "एक बिस्वा में वर्ग फुट",
+  "unitName": "बीघा का प्रकार",
+  "sourceNote": "स्रोत टिप्पणी",
+  "invalidNumber": "सही संख्या लिखें",
+  "unit_bigha": "बीघा",
+  "unit_biswa": "बिस्वा",
+  "unit_biswansi": "बिस्वांसी",
+  "unit_sqft": "वर्ग फुट",
+  "unit_sqyd": "वर्ग गज",
+  "unit_sqm": "वर्ग मीटर",
+  "unit_acre": "एकड़",
+  "disclaimer": "केवल जानकारी के लिए, कानूनी सलाह नहीं। तहसील या रजिस्ट्री कार्यालय में सत्यापित करें।",
+  "formulaBigha": "1 बीघा = {biswa} बिस्वा; 1 बिस्वा = {sqft} वर्ग फुट; 1 बिस्वा = {biswansi} बिस्वांसी",
+  "@formulaBigha": {
+    "placeholders": {
+      "biswa": {
+        "type": "String"
+      },
+      "sqft": {
+        "type": "String"
+      },
+      "biswansi": {
+        "type": "String"
+      }
+    }
+  },
+  "formulaFixed": "1 वर्ग गज = 9 वर्ग फुट; 1 वर्ग मीटर = 10.7639 वर्ग फुट; 1 एकड़ = 43,560 वर्ग फुट",
+  "formulaTotal": "कुल कीमत = दर × क्षेत्रफल (दर की इकाई में)",
+  "planYear": "योजना वर्ष",
+  "zoneType": "क्षेत्र का प्रकार",
+  "heightLimit": "ऊँचाई सीमा",
+  "notSet": "तय नहीं",
+  "noZoneHere": "इस बिंदु पर कोई क्षेत्र नहीं",
+  "mapLoadError": "नक्शा लोड नहीं हुआ",
+  "required": "ज़रूरी",
+  "addPlot": "प्लॉट जोड़ें",
+  "editPlot": "प्लॉट बदलें",
+  "deletePlot": "प्लॉट हटाएँ",
+  "location": "स्थान",
+  "latitude": "अक्षांश (lat)",
+  "longitude": "देशांतर (lng)",
+  "khasraNo": "खसरा नं.",
+  "area": "क्षेत्रफल",
+  "areaUnit": "क्षेत्रफल की इकाई",
+  "status": "स्थिति",
+  "statusForSale": "बिक्री के लिए",
+  "statusHold": "रुका हुआ",
+  "statusSold": "बिक चुका",
+  "riskNote": "मास्टर प्लान जोखिम",
+  "sourceRequired": "स्रोत (ज़रूरी)",
+  "currentOwner": "वर्तमान मालिक",
+  "previousOwners": "पिछले मालिक (कॉमा से अलग)",
+  "dealer": "डीलर",
+  "dealerPhone": "डीलर का फ़ोन",
+  "disputed": "विवादित / केस लंबित",
+  "caseType": "केस का प्रकार",
+  "court": "न्यायालय",
+  "nextDate": "अगली तारीख",
+  "casePending": "लंबित",
+  "caseResolved": "निपटा हुआ",
+  "note": "टिप्पणी",
+  "favourite": "पसंदीदा",
+  "watchlist": "वॉच-लिस्ट",
+  "favouritesOnly": "केवल पसंदीदा",
+  "filters": "फ़िल्टर",
+  "areaFilter": "इलाका",
+  "maxBudget": "अधिकतम बजट (₹)",
+  "minSqft": "न्यूनतम वर्ग फुट",
+  "maxSqft": "अधिकतम वर्ग फुट",
+  "clear": "साफ़ करें",
+  "apply": "लागू करें",
+  "openBhulekh": "भूलेख खोलें",
+  "openBhunaksha": "भूनक्शा खोलें",
+  "importCsv": "CSV आयात करें",
+  "importResult": "आयात परिणाम",
+  "imported": "जोड़े गए",
+  "skipped": "छोड़े गए",
+  "row": "पंक्ति",
+  "csvColumnsHint": "कॉलम",
+  "ok": "ठीक है",
+  "privateMode": "निजी मोड (लॉक)",
+  "setPin": "PIN सेट करें",
+  "changePin": "PIN बदलें",
+  "removePin": "PIN हटाएँ",
+  "pinHint": "4 से 8 अंक",
+  "useBiometric": "बायोमेट्रिक का उपयोग करें",
+  "enterPin": "PIN डालें",
+  "unlock": "खोलें",
+  "wrongPin": "गलत PIN",
+  "newNote": "नया नोट",
+  "editNote": "नोट बदलें",
+  "noteText": "नोट",
+  "transcriptEditable": "बोले हुए शब्द यहाँ दिखेंगे; सहेजने से पहले बदल सकते हैं",
+  "speak": "बोलकर लिखें",
+  "stopListening": "रोकें",
+  "micUnavailable": "माइक या बोली पहचान उपलब्ध नहीं है; आप टाइप कर सकते हैं",
+  "linkedPin": "जुड़ा हुआ पिन (प्लॉट)",
+  "noPin": "कोई पिन नहीं",
+  "search": "खोजें",
+  "anyDate": "कोई भी तारीख",
+  "allPins": "सभी पिन",
+  "noNotes": "कोई नोट नहीं",
+  "exportDiary": "डायरी निर्यात करें",
+  "addNoteForPin": "इस पिन के लिए नोट जोड़ें",
+  "backupData": "बैकअप सहेजें (JSON)",
+  "restoreData": "बैकअप से वापस लाएँ",
+  "backupSaved": "फ़ाइल सहेज ली गई",
+  "restoreDone": "डेटा वापस लाया गया",
+  "restoreFailed": "यह फ़ाइल सही बैकअप नहीं है; कुछ नहीं बदला",
+  "layers": "परतें",
+  "layerMetro": "मेट्रो",
+  "layerRingRoad": "रिंग रोड",
+  "layerWidening": "सड़क चौड़ीकरण",
+  "layerAcquisition": "संभावित अधिग्रहण",
+  "acquisitionWarning": "यह बिंदु संभावित अधिग्रहण क्षेत्र में है",
+  "signIn": "साइन इन",
+  "createAccount": "खाता बनाएँ",
+  "useOffline": "बिना खाते के इस फ़ोन पर चलाएँ",
+  "email": "ईमेल",
+  "password": "पासवर्ड",
+  "credentialsHint": "ईमेल लिखें; पासवर्ड कम से कम 6 अक्षर का हो",
+  "confirmEmail": "अपना ईमेल खोलकर खाते की पुष्टि करें, फिर साइन इन करें",
+  "account": "खाता और सिंक",
+  "syncNow": "अभी सिंक करें",
+  "syncFailed": "सिंक नहीं हुआ",
+  "neverSynced": "अभी तक सिंक नहीं हुआ",
+  "lastSynced": "आख़िरी सिंक",
+  "signOut": "साइन आउट",
+  "offlineMode": "अभी केवल इस फ़ोन पर",
+  "familySpace": "परिवार का स्पेस",
+  "joinWithCode": "आमंत्रण कोड से जुड़ें",
+  "inviteCode": "आमंत्रण कोड",
+  "join": "जुड़ें",
+  "orStartNew": "या नया स्पेस बनाएँ",
+  "familyName": "स्पेस का नाम",
+  "createFamily": "नया स्पेस बनाएँ",
+  "manageMembers": "सदस्य",
+  "inviteMember": "सदस्य बुलाएँ",
+  "inviteHelp": "यह कोड 3 दिन तक और केवल एक बार चलेगा। उन्हें अपना खाता बनाकर यह कोड डालना होगा।",
+  "copy": "कॉपी करें",
+  "you": "आप",
+  "roleOwner": "मालिक",
+  "roleMember": "सदस्य",
+  "removeMember": "सदस्य हटाएँ",
+  "leaveFamily": "स्पेस छोड़ें",
+  "confirmRemove": "इस सदस्य की पहुँच तुरंत बंद हो जाएगी। ठीक है?",
+  "confirmLeave": "आप इस स्पेस का डेटा देखना बंद कर देंगे। ठीक है?",
+  "removedKeepsCopy": "हटाए गए सदस्य के फ़ोन में पहले से सिंक हुई नकल रह सकती है; नई जानकारी उन्हें नहीं मिलेगी।",
+  "acquisitionCheck": "अधिग्रहण जाँच",
+  "riskNone": "किसी संभावित अधिग्रहण क्षेत्र में नहीं (उपलब्ध डेटा के अनुसार)",
+  "riskInside": "संभावित अधिग्रहण क्षेत्र के अंदर",
+  "riskNear": "संभावित अधिग्रहण क्षेत्र से {m} मीटर दूर",
+  "@riskNear": {
+    "placeholders": {
+      "m": {
+        "type": "int"
+      }
+    }
+  },
+  "corridorWidth": "गलियारे की कुल चौड़ाई",
+  "corridorCheckOf": "{layer} जाँच",
+  "@corridorCheckOf": {
+    "placeholders": {
+      "layer": {
+        "type": "String"
+      }
+    }
+  },
+  "corridorNoneOf": "किसी गलियारे में नहीं (उपलब्ध डेटा के अनुसार)",
+  "@corridorNoneOf": {
+    "placeholders": {
+      "layer": {
+        "type": "String"
+      }
+    }
+  },
+  "corridorInsideOf": "{layer} गलियारे के अंदर",
+  "@corridorInsideOf": {
+    "placeholders": {
+      "layer": {
+        "type": "String"
+      }
+    }
+  },
+  "corridorNearOf": "{layer} गलियारे से {m} मीटर दूर",
+  "@corridorNearOf": {
+    "placeholders": {
+      "layer": {
+        "type": "String"
+      },
+      "m": {
+        "type": "int"
+      }
+    }
+  },
+  "corridorWidthUnknownOf": "पास में {layer} मार्ग है पर डेटा में चौड़ाई नहीं दी गई",
+  "@corridorWidthUnknownOf": {
+    "placeholders": {
+      "layer": {
+        "type": "String"
+      }
+    }
+  },
+  "sideNorth": "उत्तर की ओर",
+  "sideSouth": "दक्षिण की ओर",
+  "sideEast": "पूर्व की ओर",
+  "sideWest": "पश्चिम की ओर",
+  "corridorSides": "गलियारा: बाएँ {left} मी, दाएँ {right} मी (रेखा की दिशा में देखते हुए)",
+  "@corridorSides": {
+    "placeholders": {
+      "left": {
+        "type": "String"
+      },
+      "right": {
+        "type": "String"
+      }
+    }
+  },
+  "corridorSquareEnds": "गलियारे के सिरे सीधे कटे हुए (चौकोर)",
+  "corridorAngledEnds": "गलियारे के सिरे तिरछे कटे हुए: शुरू {start}°, अंत {end}° (वामावर्त, ऊपर से देखने पर)",
+  "@corridorAngledEnds": {
+    "placeholders": {
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  }
+}

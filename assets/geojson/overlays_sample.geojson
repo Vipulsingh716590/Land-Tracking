@@ -1,0 +1,170 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            82.17,
+            26.775
+          ],
+          [
+            82.185,
+            26.785
+          ],
+          [
+            82.2,
+            26.792
+          ],
+          [
+            82.215,
+            26.8
+          ],
+          [
+            82.23,
+            26.806
+          ]
+        ]
+      },
+      "properties": {
+        "id": "demo-m1",
+        "kind": "metro",
+        "name_hi": "मेट्रो मार्ग (डेमो)",
+        "name_en": "Metro route (demo)",
+        "source": "DEMO sample shape, not an official alignment",
+        "updated_on": "2026-10-20",
+        "is_demo": true,
+        "corridor_width_m": 20
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            82.165,
+            26.8
+          ],
+          [
+            82.172,
+            26.77
+          ],
+          [
+            82.205,
+            26.76
+          ],
+          [
+            82.24,
+            26.775
+          ],
+          [
+            82.245,
+            26.805
+          ],
+          [
+            82.22,
+            26.825
+          ],
+          [
+            82.185,
+            26.822
+          ],
+          [
+            82.165,
+            26.8
+          ]
+        ]
+      },
+      "properties": {
+        "id": "demo-r1",
+        "kind": "ring_road",
+        "name_hi": "रिंग रोड (डेमो)",
+        "name_en": "Ring road (demo)",
+        "source": "DEMO sample shape, not an official alignment",
+        "updated_on": "2026-10-20",
+        "is_demo": true,
+        "corridor_width_m": 60
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            82.195,
+            26.78
+          ],
+          [
+            82.198,
+            26.79
+          ],
+          [
+            82.202,
+            26.8
+          ],
+          [
+            82.206,
+            26.812
+          ]
+        ]
+      },
+      "properties": {
+        "id": "demo-w1",
+        "kind": "road_widening",
+        "name_hi": "सड़क चौड़ीकरण (डेमो)",
+        "name_en": "Road widening (demo)",
+        "source": "DEMO sample shape, not an official alignment",
+        "updated_on": "2026-10-20",
+        "is_demo": true,
+        "corridor_left_m": 0,
+        "corridor_right_m": 25,
+        "corridor_end": "angled",
+        "corridor_start_angle_deg": 0,
+        "corridor_end_angle_deg": 30
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              82.204,
+              26.797
+            ],
+            [
+              82.20899999999999,
+              26.797
+            ],
+            [
+              82.20899999999999,
+              26.801000000000002
+            ],
+            [
+              82.204,
+              26.801000000000002
+            ],
+            [
+              82.204,
+              26.797
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "demo-a1",
+        "kind": "acquisition",
+        "name_hi": "संभावित अधिग्रहण (डेमो)",
+        "name_en": "Possible acquisition (demo)",
+        "source": "DEMO sample shape, not an official alignment",
+        "updated_on": "2026-10-20",
+        "is_demo": true
+      }
+    }
+  ]
+}

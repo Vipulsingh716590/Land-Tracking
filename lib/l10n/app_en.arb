@@ -1,0 +1,267 @@
+{
+  "@@locale": "en",
+  "appTitle": "Ayodhya Zameen",
+  "welcomeTitle": "Welcome",
+  "welcomeSubtitle": "Your private record of land in Ayodhya",
+  "chooseLanguage": "Choose language",
+  "continueBtn": "Continue",
+  "home": "Home",
+  "calculator": "Calculator",
+  "settings": "Settings",
+  "map": "Map",
+  "plots": "Plots",
+  "diary": "Diary",
+  "comingSoon": "Coming soon",
+  "language": "Language",
+  "darkMode": "Dark mode",
+  "district": "District",
+  "value": "Value",
+  "fromUnit": "From unit",
+  "results": "Results",
+  "formula": "Formula",
+  "source": "Source",
+  "lastUpdated": "Last updated",
+  "demo": "DEMO",
+  "unverified": "Unverified — please check yourself",
+  "ratePerUnit": "Rate (per unit)",
+  "rateUnit": "Rate unit",
+  "totalPrice": "Total price",
+  "unitRules": "Unit rules",
+  "editRule": "Edit rule",
+  "addRule": "Add rule",
+  "deleteRule": "Delete rule",
+  "save": "Save",
+  "cancel": "Cancel",
+  "biswaPerBigha": "Biswa per bigha",
+  "biswansiPerBiswa": "Biswansi per biswa",
+  "sqftPerBiswa": "Sq ft per biswa",
+  "unitName": "Bigha type",
+  "sourceNote": "Source note",
+  "invalidNumber": "Enter a valid number",
+  "unit_bigha": "Bigha",
+  "unit_biswa": "Biswa",
+  "unit_biswansi": "Biswansi",
+  "unit_sqft": "Sq ft",
+  "unit_sqyd": "Sq yard",
+  "unit_sqm": "Sq metre",
+  "unit_acre": "Acre",
+  "disclaimer": "Information only, not legal advice. Verify at the tehsil or registry office.",
+  "formulaBigha": "1 bigha = {biswa} biswa; 1 biswa = {sqft} sq ft; 1 biswa = {biswansi} biswansi",
+  "@formulaBigha": {
+    "placeholders": {
+      "biswa": {
+        "type": "String"
+      },
+      "sqft": {
+        "type": "String"
+      },
+      "biswansi": {
+        "type": "String"
+      }
+    }
+  },
+  "formulaFixed": "1 sq yd = 9 sq ft; 1 sq m = 10.7639 sq ft; 1 acre = 43,560 sq ft",
+  "formulaTotal": "Total price = rate × area (in the rate's unit)",
+  "planYear": "Plan year",
+  "zoneType": "Zone type",
+  "heightLimit": "Height limit",
+  "notSet": "Not set",
+  "noZoneHere": "No zone at this point",
+  "mapLoadError": "Could not load map",
+  "required": "Required",
+  "addPlot": "Add plot",
+  "editPlot": "Edit plot",
+  "deletePlot": "Delete plot",
+  "location": "Location",
+  "latitude": "Latitude",
+  "longitude": "Longitude",
+  "khasraNo": "Khasra no.",
+  "area": "Area",
+  "areaUnit": "Area unit",
+  "status": "Status",
+  "statusForSale": "For sale",
+  "statusHold": "On hold",
+  "statusSold": "Sold",
+  "riskNote": "Master-plan risk",
+  "sourceRequired": "Source (required)",
+  "currentOwner": "Current owner",
+  "previousOwners": "Previous owners (comma separated)",
+  "dealer": "Dealer",
+  "dealerPhone": "Dealer phone",
+  "disputed": "Disputed / case pending",
+  "caseType": "Case type",
+  "court": "Court",
+  "nextDate": "Next date",
+  "casePending": "Pending",
+  "caseResolved": "Resolved",
+  "note": "Note",
+  "favourite": "Favourite",
+  "watchlist": "Watch-list",
+  "favouritesOnly": "Favourites only",
+  "filters": "Filters",
+  "areaFilter": "Area",
+  "maxBudget": "Max budget (₹)",
+  "minSqft": "Min sq ft",
+  "maxSqft": "Max sq ft",
+  "clear": "Clear",
+  "apply": "Apply",
+  "openBhulekh": "Open Bhulekh",
+  "openBhunaksha": "Open Bhunaksha",
+  "importCsv": "Import CSV",
+  "importResult": "Import result",
+  "imported": "Added",
+  "skipped": "Skipped",
+  "row": "Row",
+  "csvColumnsHint": "Columns",
+  "ok": "OK",
+  "privateMode": "Private mode (lock)",
+  "setPin": "Set PIN",
+  "changePin": "Change PIN",
+  "removePin": "Remove PIN",
+  "pinHint": "4 to 8 digits",
+  "useBiometric": "Use biometrics",
+  "enterPin": "Enter PIN",
+  "unlock": "Unlock",
+  "wrongPin": "Wrong PIN",
+  "newNote": "New note",
+  "editNote": "Edit note",
+  "noteText": "Note",
+  "transcriptEditable": "Spoken words appear here; edit before saving",
+  "speak": "Speak",
+  "stopListening": "Stop",
+  "micUnavailable": "Microphone or speech recognition is unavailable; you can type instead",
+  "linkedPin": "Linked pin (plot)",
+  "noPin": "No pin",
+  "search": "Search",
+  "anyDate": "Any date",
+  "allPins": "All pins",
+  "noNotes": "No notes",
+  "exportDiary": "Export diary",
+  "addNoteForPin": "Add note for this pin",
+  "backupData": "Save backup (JSON)",
+  "restoreData": "Restore from backup",
+  "backupSaved": "File saved",
+  "restoreDone": "Data restored",
+  "restoreFailed": "Not a valid backup file; nothing was changed",
+  "layers": "Layers",
+  "layerMetro": "Metro",
+  "layerRingRoad": "Ring road",
+  "layerWidening": "Road widening",
+  "layerAcquisition": "Possible acquisition",
+  "acquisitionWarning": "This point is inside a possible acquisition area",
+  "signIn": "Sign in",
+  "createAccount": "Create account",
+  "useOffline": "Use on this phone without an account",
+  "email": "Email",
+  "password": "Password",
+  "credentialsHint": "Enter an email; password must be at least 6 characters",
+  "confirmEmail": "Open your email to confirm the account, then sign in",
+  "account": "Account and sync",
+  "syncNow": "Sync now",
+  "syncFailed": "Sync failed",
+  "neverSynced": "Not synced yet",
+  "lastSynced": "Last synced",
+  "signOut": "Sign out",
+  "offlineMode": "Currently on this phone only",
+  "familySpace": "Family space",
+  "joinWithCode": "Join with an invite code",
+  "inviteCode": "Invite code",
+  "join": "Join",
+  "orStartNew": "Or start a new space",
+  "familyName": "Space name",
+  "createFamily": "Create new space",
+  "manageMembers": "Members",
+  "inviteMember": "Invite member",
+  "inviteHelp": "This code works once and for 3 days. They must create their own account, then enter it.",
+  "copy": "Copy",
+  "you": "you",
+  "roleOwner": "Owner",
+  "roleMember": "Member",
+  "removeMember": "Remove member",
+  "leaveFamily": "Leave space",
+  "confirmRemove": "This person loses access immediately. Continue?",
+  "confirmLeave": "You will stop seeing this space's data. Continue?",
+  "removedKeepsCopy": "A removed member may still hold a copy already synced to their phone; they will not receive anything new.",
+  "acquisitionCheck": "Acquisition check",
+  "riskNone": "Not in any possible acquisition area (per the data available)",
+  "riskInside": "Inside a possible acquisition area",
+  "riskNear": "{m} m from a possible acquisition area",
+  "@riskNear": {
+    "placeholders": {
+      "m": {
+        "type": "int"
+      }
+    }
+  },
+  "corridorWidth": "Total corridor width",
+  "corridorCheckOf": "{layer} check",
+  "@corridorCheckOf": {
+    "placeholders": {
+      "layer": {
+        "type": "String"
+      }
+    }
+  },
+  "corridorNoneOf": "not in any {layer} corridor (per the data available)",
+  "@corridorNoneOf": {
+    "placeholders": {
+      "layer": {
+        "type": "String"
+      }
+    }
+  },
+  "corridorInsideOf": "Inside a {layer} corridor",
+  "@corridorInsideOf": {
+    "placeholders": {
+      "layer": {
+        "type": "String"
+      }
+    }
+  },
+  "corridorNearOf": "{m} m from a {layer} corridor",
+  "@corridorNearOf": {
+    "placeholders": {
+      "layer": {
+        "type": "String"
+      },
+      "m": {
+        "type": "int"
+      }
+    }
+  },
+  "corridorWidthUnknownOf": "A {layer} route is close but the data gives no corridor width",
+  "@corridorWidthUnknownOf": {
+    "placeholders": {
+      "layer": {
+        "type": "String"
+      }
+    }
+  },
+  "sideNorth": "north side",
+  "sideSouth": "south side",
+  "sideEast": "east side",
+  "sideWest": "west side",
+  "corridorSides": "Corridor: left {left} m, right {right} m (looking along the line)",
+  "@corridorSides": {
+    "placeholders": {
+      "left": {
+        "type": "String"
+      },
+      "right": {
+        "type": "String"
+      }
+    }
+  },
+  "corridorSquareEnds": "Corridor ends are cut off square",
+  "corridorAngledEnds": "Corridor ends cut at an angle: start {start}°, end {end}° (anticlockwise, seen from above)",
+  "@corridorAngledEnds": {
+    "placeholders": {
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  }
+}
