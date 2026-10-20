@@ -13,6 +13,8 @@ import '../../plots/presentation/plots_screen.dart' show filterPlots, plotRiskLe
 import '../../calculator/data/unit_rules_repository.dart';
 import '../../settings/settings_controller.dart';
 import '../data/zones_repository.dart';
+import '../../osm/osm_repository.dart';
+import '../../osm/osm_way.dart';
 import '../domain/acquisition_risk.dart';
 import '../domain/overlay.dart';
 import '../domain/zone.dart';
@@ -40,6 +42,14 @@ String overlayLabel(AppLocalizations t, OverlayKind k) => switch (k) {
       OverlayKind.acquisition => t.layerAcquisition,
     };
 
+Color osmColour(OsmKind k) => switch (k) {
+      OsmKind.majorRoad => Colors.blueGrey,
+      OsmKind.roadWorks => Colors.orange,
+      OsmKind.rail => Colors.black87,
+      OsmKind.railWorks => Colors.grey,
+      OsmKind.river => Colors.blue,
+    };
+
 class MapScreen extends ConsumerStatefulWidget {
   const MapScreen({super.key});
 
@@ -50,12 +60,14 @@ class MapScreen extends ConsumerStatefulWidget {
 class _MapScreenState extends ConsumerState<MapScreen> {
   ({double lat, double lng, Zone? zone, bool inAcquisition})? tapped;
   MapOverlay? tappedOverlay;
+  OsmWay? tappedOsm;
 
   void _onTap(LatLng p, List<Zone> zones, List<MapOverlay> shown) {
     final hit = zones.where((z) => z.contains(p.latitude, p.longitude));
     final acq = shown.any((o) => o.contains(p.latitude, p.longitude));
     setState(() {
       tappedOverlay = null;
+      tappedOsm = null;
       tapped = (lat: p.latitude, lng: p.longitude, zone: hit.firstOrNull, inAcquisition: acq);
     });
   }
@@ -138,6 +150,28 @@ class _MapScreenState extends ConsumerState<MapScreen> {
               }),
             ),
         };
+        final osmOn = ref.watch(osmVisibleProvider);
+        final osm = ref.watch(osmProvider);
+        final osmLines = {
+          if (osmOn)
+            for (final w in osm.value?.ways ?? const <OsmWay>[])
+              Polyline(
+                polylineId: PolylineId('osm-${w.id}'),
+                points: [for (final p in w.points) LatLng(p.lat, p.lng)],
+                color: osmColour(w.kind),
+                width: 3,
+                patterns: (w.kind == OsmKind.roadWorks || w.kind == OsmKind.railWorks)
+                    ? [PatternItem.dash(12), PatternItem.gap(8)]
+                    : const [],
+                zIndex: 0,
+                consumeTapEvents: true,
+                onTap: () => setState(() {
+                  tapped = null;
+                  tappedOverlay = null;
+                  tappedOsm = w;
+                }),
+              ),
+        };
         final acqPolygons = {
           for (final o in shown.where((o) => o.isArea))
             Polygon(
@@ -155,7 +189,7 @@ class _MapScreenState extends ConsumerState<MapScreen> {
           GoogleMap(
             initialCameraPosition: const CameraPosition(target: _ayodhya, zoom: 13),
             polygons: {...polygons, ...acqPolygons},
-            polylines: polylines,
+            polylines: {...osmLines, ...polylines},
             markers: markers,
             circles: circles,
             onLongPress: (p) => Navigator.push(
@@ -190,6 +224,15 @@ class _MapScreenState extends ConsumerState<MapScreen> {
                         .set(planYears[v.round()]),
                   ),
                   Wrap(spacing: 6, children: [
+                    FilterChip(
+                      visualDensity: VisualDensity.compact,
+                      avatar: osm.isLoading
+                          ? const SizedBox(width: 12, height: 12, child: CircularProgressIndicator(strokeWidth: 2))
+                          : const Icon(Icons.public, size: 14),
+                      label: Text(t.layerOsm),
+                      selected: osmOn,
+                      onSelected: (_) => ref.read(osmVisibleProvider.notifier).toggle(),
+                    ),
                     for (final k in OverlayKind.values)
                       FilterChip(
                         visualDensity: VisualDensity.compact,
@@ -212,6 +255,20 @@ class _MapScreenState extends ConsumerState<MapScreen> {
               ),
             ),
           ),
+          if (osmOn)
+            Positioned(
+              left: 8,
+              bottom: tapped != null || tappedOverlay != null || tappedOsm != null ? 150 : 8,
+              child: _OsmCredit(data: osm.value, loading: osm.isLoading,
+                  onRefresh: () => ref.read(osmProvider.notifier).refresh()),
+            ),
+          if (tappedOsm != null)
+            Positioned(
+              left: 8,
+              right: 8,
+              bottom: 8,
+              child: _OsmCard(way: tappedOsm!, lang: lang, onClose: () => setState(() => tappedOsm = null)),
+            ),
           if (tappedOverlay != null)
             Positioned(
               left: 8,
@@ -325,6 +382,66 @@ class _OverlayCard extends StatelessWidget {
                         overlay.endAngleDeg!.toStringAsFixed(0))),
               Text('${t.source}: ${overlay.source}'),
               Text('${t.lastUpdated}: ${overlay.updatedOn}'),
+            ]),
+      ),
+    );
+  }
+}
+
+class _OsmCredit extends StatelessWidget {
+  const _OsmCredit({required this.data, required this.loading, required this.onRefresh});
+  final OsmData? data;
+  final bool loading;
+  final VoidCallback onRefresh;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context);
+    final d = data;
+    final status = loading
+        ? t.osmLoading
+        : d == null || d.fetchedAt == null
+            ? '${t.osmFailed}${d?.error == null ? '' : ': ${d!.error}'}'
+            : '${t.osmUpdated}: ${d.fetchedAt!.substring(0, 10)}${d.fromCache ? ' (${t.osmSaved})' : ''}';
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.only(left: 8),
+        child: Row(mainAxisSize: MainAxisSize.min, children: [
+          Text('© OpenStreetMap contributors · $status', style: Theme.of(context).textTheme.labelSmall),
+          IconButton(
+            tooltip: t.refresh, visualDensity: VisualDensity.compact,
+            icon: const Icon(Icons.refresh, size: 18), onPressed: loading ? null : onRefresh),
+        ]),
+      ),
+    );
+  }
+}
+
+class _OsmCard extends StatelessWidget {
+  const _OsmCard({required this.way, required this.lang, required this.onClose});
+  final OsmWay way;
+  final String lang;
+  final VoidCallback onClose;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context);
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(children: [
+                Expanded(
+                    child: Text(way.name.isEmpty ? osmKindName(way.kind, lang) : way.name,
+                        style: Theme.of(context).textTheme.titleMedium)),
+                IconButton(onPressed: onClose, icon: const Icon(Icons.close)),
+              ]),
+              Text(osmKindName(way.kind, lang)),
+              Text('${t.source}: OpenStreetMap (${way.url}), ODbL'),
+              Text(t.osmNotOfficial, style: const TextStyle(color: Colors.red)),
             ]),
       ),
     );

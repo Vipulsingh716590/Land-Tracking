@@ -592,4 +592,64 @@ class AppLocalizationsHi extends AppLocalizations {
   String corridorAngledEnds(String start, String end) {
     return 'गलियारे के सिरे तिरछे कटे हुए: शुरू $start°, अंत $end° (वामावर्त, ऊपर से देखने पर)';
   }
+
+  @override
+  String get layerOsm => 'OpenStreetMap (असली सड़क/रेल/नदी)';
+
+  @override
+  String get osmLoading => 'लोड हो रहा है';
+
+  @override
+  String get osmFailed => 'डाउनलोड नहीं हुआ';
+
+  @override
+  String get osmUpdated => 'अपडेट';
+
+  @override
+  String get osmSaved => 'फ़ोन में सहेजा';
+
+  @override
+  String get refresh => 'ताज़ा करें';
+
+  @override
+  String get osmNotOfficial =>
+      'यह स्वयंसेवकों का बनाया नक्शा है, सरकारी रेखांकन नहीं। मास्टर प्लान से मिलाकर जाँचें।';
+
+  @override
+  String get realData => 'असली डेटा';
+
+  @override
+  String get realDataHelp =>
+      'ADA मास्टर प्लान, IGRSUP रेट और भूलेख के लिए कोई खुला API नहीं है। उन्हें आधिकारिक साइट से देखकर यहाँ फ़ाइल से डालें।';
+
+  @override
+  String get importZones => 'ज़ोन GeoJSON आयात करें';
+
+  @override
+  String get importOverlays =>
+      'मेट्रो/रिंग रोड/चौड़ीकरण/अधिग्रहण GeoJSON आयात करें';
+
+  @override
+  String get resetToDemo => 'नक्शे का डेटा डेमो पर वापस करें';
+
+  @override
+  String get removeDemo => 'सभी डेमो रिकॉर्ड हटाएँ';
+
+  @override
+  String get removed => 'हटाए गए';
+
+  @override
+  String get importBad => 'फ़ाइल सही नहीं है; कुछ नहीं बदला';
+
+  @override
+  String get findOnMap => 'नक्शे पर खोजें';
+
+  @override
+  String get pickPlace => 'स्थान चुनें';
+
+  @override
+  String get noPlaceFound => 'कोई स्थान नहीं मिला';
+
+  @override
+  String get searchFailed => 'खोज नहीं हो सकी';
 }

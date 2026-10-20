@@ -5,6 +5,7 @@ import '../../../l10n/generated/app_localizations.dart';
 import '../../calculator/data/unit_rules_repository.dart';
 import '../../calculator/domain/area_converter.dart';
 import '../../calculator/presentation/calculator_screen.dart' show unitLabel;
+import '../../osm/nominatim.dart';
 import '../data/plots_repository.dart';
 import '../domain/models.dart';
 
@@ -24,6 +25,7 @@ class _PlotFormState extends ConsumerState<PlotForm> {
   late String ruleId;
   late PlotStatus status;
   bool disputed = false;
+  bool searching = false;
   DisputeStatus dStatus = DisputeStatus.pending;
 
   TextEditingController _c(String k, [String? v]) =>
@@ -86,6 +88,39 @@ class _PlotFormState extends ConsumerState<PlotForm> {
     );
   }
 
+  /// Looks the place name up on OpenStreetMap Nominatim and fills latitude / longitude.
+  Future<void> _search() async {
+    final t = AppLocalizations.of(context);
+    final q = c['location']!.text.trim();
+    if (q.isEmpty) return;
+    setState(() => searching = true);
+    try {
+      final hits = await searchPlace(q);
+      if (!mounted) return;
+      if (hits.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(t.noPlaceFound)));
+      } else {
+        final pick = await showDialog<PlaceHit>(
+          context: context,
+          builder: (_) => SimpleDialog(title: Text(t.pickPlace), children: [
+            for (final h in hits)
+              SimpleDialogOption(onPressed: () => Navigator.pop(context, h), child: Text(h.name)),
+          ]),
+        );
+        if (pick != null) {
+          c['lat']!.text = pick.lat.toStringAsFixed(6);
+          c['lng']!.text = pick.lng.toStringAsFixed(6);
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${t.searchFailed}: $e')));
+      }
+    } finally {
+      if (mounted) setState(() => searching = false);
+    }
+  }
+
   void _save() {
     if (!_key.currentState!.validate()) return;
     final id = widget.plot?.id ?? DateTime.now().microsecondsSinceEpoch.toString();
@@ -131,6 +166,16 @@ class _PlotFormState extends ConsumerState<PlotForm> {
         key: _key,
         child: ListView(padding: const EdgeInsets.all(16), children: [
           _f('location', t.location, v: _req),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: TextButton.icon(
+              icon: searching
+                  ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2))
+                  : const Icon(Icons.search),
+              label: Text(t.findOnMap),
+              onPressed: searching ? null : _search,
+            ),
+          ),
           Row(children: [
             Expanded(child: _f('lat', t.latitude, v: _lat, num: true)),
             const SizedBox(width: 8),

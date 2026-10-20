@@ -73,3 +73,12 @@ east side run further past the last point and the west side stop short of it; at
 positive angle makes the west side start before the first point and the east side start after it.
 Angles without `"angled"` are rejected so they are never silently ignored.
 Keep each end segment much longer than the corridor reach times tan(angle).
+
+## Real data
+- **OpenStreetMap (live API):** the map's "OpenStreetMap" chip downloads real roads, railways and rivers
+  around Ayodhya from the public Overpass API and keeps the last download on the phone. Plot forms have a
+  "Find on map" button that fills latitude/longitude from Nominatim. © OpenStreetMap contributors, ODbL.
+  This is volunteer-mapped data, not an official alignment.
+- **No open API exists** for the ADA master plan, IGRSUP circle rates or Bhulekh/Bhunaksha (login/captcha),
+  and the app does not scrape them. Read them from the official sites, then use Settings →
+  Real data to import zones and overlay GeoJSON, import plots by CSV, and "Remove all DEMO records".

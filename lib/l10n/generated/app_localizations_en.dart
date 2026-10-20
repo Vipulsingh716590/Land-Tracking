@@ -595,4 +595,64 @@ class AppLocalizationsEn extends AppLocalizations {
   String corridorAngledEnds(String start, String end) {
     return 'Corridor ends cut at an angle: start $start°, end $end° (anticlockwise, seen from above)';
   }
+
+  @override
+  String get layerOsm => 'OpenStreetMap (real roads/rail/river)';
+
+  @override
+  String get osmLoading => 'loading';
+
+  @override
+  String get osmFailed => 'download failed';
+
+  @override
+  String get osmUpdated => 'updated';
+
+  @override
+  String get osmSaved => 'saved on phone';
+
+  @override
+  String get refresh => 'Refresh';
+
+  @override
+  String get osmNotOfficial =>
+      'Volunteer-mapped data, not an official alignment. Check against the master plan.';
+
+  @override
+  String get realData => 'Real data';
+
+  @override
+  String get realDataHelp =>
+      'There is no open API for the ADA master plan, IGRSUP rates or Bhulekh. Read them from the official sites and load them here from a file.';
+
+  @override
+  String get importZones => 'Import zones GeoJSON';
+
+  @override
+  String get importOverlays =>
+      'Import metro / ring road / widening / acquisition GeoJSON';
+
+  @override
+  String get resetToDemo => 'Reset map data to DEMO';
+
+  @override
+  String get removeDemo => 'Remove all DEMO records';
+
+  @override
+  String get removed => 'Removed';
+
+  @override
+  String get importBad => 'Not a valid file; nothing was changed';
+
+  @override
+  String get findOnMap => 'Find on map';
+
+  @override
+  String get pickPlace => 'Choose a place';
+
+  @override
+  String get noPlaceFound => 'No place found';
+
+  @override
+  String get searchFailed => 'Search failed';
 }

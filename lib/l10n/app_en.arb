@@ -263,5 +263,24 @@
         "type": "String"
       }
     }
-  }
+  },
+  "layerOsm": "OpenStreetMap (real roads/rail/river)",
+  "osmLoading": "loading",
+  "osmFailed": "download failed",
+  "osmUpdated": "updated",
+  "osmSaved": "saved on phone",
+  "refresh": "Refresh",
+  "osmNotOfficial": "Volunteer-mapped data, not an official alignment. Check against the master plan.",
+  "realData": "Real data",
+  "realDataHelp": "There is no open API for the ADA master plan, IGRSUP rates or Bhulekh. Read them from the official sites and load them here from a file.",
+  "importZones": "Import zones GeoJSON",
+  "importOverlays": "Import metro / ring road / widening / acquisition GeoJSON",
+  "resetToDemo": "Reset map data to DEMO",
+  "removeDemo": "Remove all DEMO records",
+  "removed": "Removed",
+  "importBad": "Not a valid file; nothing was changed",
+  "findOnMap": "Find on map",
+  "pickPlace": "Choose a place",
+  "noPlaceFound": "No place found",
+  "searchFailed": "Search failed"
 }

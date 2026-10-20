@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/widgets/language_toggle.dart';
 import '../../l10n/generated/app_localizations.dart';
+import 'data_tools.dart';
 import '../backup/backup_service.dart';
 import '../sync/members_screen.dart';
 import '../sync/supabase_config.dart';
@@ -97,6 +98,38 @@ class SettingsScreen extends ConsumerWidget {
             onTap: ref.read(syncProvider.notifier).showSignIn,
           ),
       ],
+      const Divider(),
+      Text(t.realData, style: Theme.of(context).textTheme.titleMedium),
+      Text(t.realDataHelp, style: Theme.of(context).textTheme.bodySmall),
+      ListTile(
+        contentPadding: EdgeInsets.zero,
+        leading: const Icon(Icons.layers),
+        title: Text(t.importZones),
+        onTap: () => importGeojson(context, ref, zones: true),
+      ),
+      ListTile(
+        contentPadding: EdgeInsets.zero,
+        leading: const Icon(Icons.route),
+        title: Text(t.importOverlays),
+        onTap: () => importGeojson(context, ref, zones: false),
+      ),
+      ListTile(
+        contentPadding: EdgeInsets.zero,
+        leading: const Icon(Icons.restore_page),
+        title: Text(t.resetToDemo),
+        onTap: () => resetGeojson(ref),
+      ),
+      ListTile(
+        contentPadding: EdgeInsets.zero,
+        leading: const Icon(Icons.cleaning_services),
+        title: Text(t.removeDemo),
+        onTap: () async {
+          final n = await removeDemoRecords(ref);
+          if (context.mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${t.removed}: $n')));
+          }
+        },
+      ),
       const Divider(),
       ListTile(
         contentPadding: EdgeInsets.zero,

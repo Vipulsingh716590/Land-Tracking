@@ -1213,6 +1213,120 @@ abstract class AppLocalizations {
   /// In hi, this message translates to:
   /// **'गलियारे के सिरे तिरछे कटे हुए: शुरू {start}°, अंत {end}° (वामावर्त, ऊपर से देखने पर)'**
   String corridorAngledEnds(String start, String end);
+
+  /// No description provided for @layerOsm.
+  ///
+  /// In hi, this message translates to:
+  /// **'OpenStreetMap (असली सड़क/रेल/नदी)'**
+  String get layerOsm;
+
+  /// No description provided for @osmLoading.
+  ///
+  /// In hi, this message translates to:
+  /// **'लोड हो रहा है'**
+  String get osmLoading;
+
+  /// No description provided for @osmFailed.
+  ///
+  /// In hi, this message translates to:
+  /// **'डाउनलोड नहीं हुआ'**
+  String get osmFailed;
+
+  /// No description provided for @osmUpdated.
+  ///
+  /// In hi, this message translates to:
+  /// **'अपडेट'**
+  String get osmUpdated;
+
+  /// No description provided for @osmSaved.
+  ///
+  /// In hi, this message translates to:
+  /// **'फ़ोन में सहेजा'**
+  String get osmSaved;
+
+  /// No description provided for @refresh.
+  ///
+  /// In hi, this message translates to:
+  /// **'ताज़ा करें'**
+  String get refresh;
+
+  /// No description provided for @osmNotOfficial.
+  ///
+  /// In hi, this message translates to:
+  /// **'यह स्वयंसेवकों का बनाया नक्शा है, सरकारी रेखांकन नहीं। मास्टर प्लान से मिलाकर जाँचें।'**
+  String get osmNotOfficial;
+
+  /// No description provided for @realData.
+  ///
+  /// In hi, this message translates to:
+  /// **'असली डेटा'**
+  String get realData;
+
+  /// No description provided for @realDataHelp.
+  ///
+  /// In hi, this message translates to:
+  /// **'ADA मास्टर प्लान, IGRSUP रेट और भूलेख के लिए कोई खुला API नहीं है। उन्हें आधिकारिक साइट से देखकर यहाँ फ़ाइल से डालें।'**
+  String get realDataHelp;
+
+  /// No description provided for @importZones.
+  ///
+  /// In hi, this message translates to:
+  /// **'ज़ोन GeoJSON आयात करें'**
+  String get importZones;
+
+  /// No description provided for @importOverlays.
+  ///
+  /// In hi, this message translates to:
+  /// **'मेट्रो/रिंग रोड/चौड़ीकरण/अधिग्रहण GeoJSON आयात करें'**
+  String get importOverlays;
+
+  /// No description provided for @resetToDemo.
+  ///
+  /// In hi, this message translates to:
+  /// **'नक्शे का डेटा डेमो पर वापस करें'**
+  String get resetToDemo;
+
+  /// No description provided for @removeDemo.
+  ///
+  /// In hi, this message translates to:
+  /// **'सभी डेमो रिकॉर्ड हटाएँ'**
+  String get removeDemo;
+
+  /// No description provided for @removed.
+  ///
+  /// In hi, this message translates to:
+  /// **'हटाए गए'**
+  String get removed;
+
+  /// No description provided for @importBad.
+  ///
+  /// In hi, this message translates to:
+  /// **'फ़ाइल सही नहीं है; कुछ नहीं बदला'**
+  String get importBad;
+
+  /// No description provided for @findOnMap.
+  ///
+  /// In hi, this message translates to:
+  /// **'नक्शे पर खोजें'**
+  String get findOnMap;
+
+  /// No description provided for @pickPlace.
+  ///
+  /// In hi, this message translates to:
+  /// **'स्थान चुनें'**
+  String get pickPlace;
+
+  /// No description provided for @noPlaceFound.
+  ///
+  /// In hi, this message translates to:
+  /// **'कोई स्थान नहीं मिला'**
+  String get noPlaceFound;
+
+  /// No description provided for @searchFailed.
+  ///
+  /// In hi, this message translates to:
+  /// **'खोज नहीं हो सकी'**
+  String get searchFailed;
 }
 
 class _AppLocalizationsDelegate
