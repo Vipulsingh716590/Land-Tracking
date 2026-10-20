@@ -11,9 +11,8 @@ Unit rules in `lib/features/calculator/data/unit_rules_seed.dart` are DEMO
 placeholders. Edit them in the app (calculator → tune icon) or in the seed file.
 
 ## Phase 2: map
-Add your Google Maps key (not committed):
-- Android: `MAPS_API_KEY=...` in `android/local.properties`
-- iOS: replace `YOUR_GOOGLE_MAPS_API_KEY` in `ios/Runner/AppDelegate.swift`
+The map uses OpenStreetMap tiles through `flutter_map`, so no API key is needed.
+Tiles come from the public tile.openstreetmap.org server: fine for a personal app, not for heavy use.
 
 Zones load from `assets/geojson/zones_sample.geojson` (DEMO shapes, not the real master plan).
 

@@ -1,6 +1,9 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 
 import '../../../core/widgets/demo_badge.dart';
 import '../../../l10n/generated/app_localizations.dart';
@@ -20,6 +23,11 @@ import '../domain/overlay.dart';
 import '../domain/zone.dart';
 
 const _ayodhya = LatLng(26.7922, 82.1998);
+const _tileUrl = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+
+/// Metres on the ground covered by one screen pixel at this zoom and latitude.
+double metersPerPixel(double zoom, double lat) =>
+    156543.03392 * math.cos(lat * math.pi / 180) / math.pow(2, zoom);
 
 Color zoneColour(String c) => switch (c) {
       'red' => Colors.red,
@@ -58,11 +66,49 @@ class MapScreen extends ConsumerStatefulWidget {
 }
 
 class _MapScreenState extends ConsumerState<MapScreen> {
+  final _controller = MapController();
   ({double lat, double lng, Zone? zone, bool inAcquisition})? tapped;
   MapOverlay? tappedOverlay;
   OsmWay? tappedOsm;
 
-  void _onTap(LatLng p, List<Zone> zones, List<MapOverlay> shown) {
+  double _distanceToLine(double lat, double lng, List<LatLngPoint> pts) {
+    var d = double.infinity;
+    for (var i = 0; i < pts.length - 1; i++) {
+      d = math.min(d, distanceToSegmentM(lat, lng, pts[i], pts[i + 1]));
+    }
+    return d;
+  }
+
+  void _onTap(LatLng p, List<Zone> zones, List<MapOverlay> shown, List<OsmWay> osm) {
+    // Lines are thin, so a tap counts when it lands within ~14 screen pixels of one.
+    final tol = 14 * metersPerPixel(_controller.camera.zoom, p.latitude);
+    MapOverlay? bestOverlay;
+    OsmWay? bestOsm;
+    var best = tol;
+    for (final o in shown.where((o) => !o.isArea)) {
+      final d = _distanceToLine(p.latitude, p.longitude, o.points);
+      if (d <= best) {
+        best = d;
+        bestOverlay = o;
+        bestOsm = null;
+      }
+    }
+    for (final w in osm) {
+      final d = _distanceToLine(p.latitude, p.longitude, w.points);
+      if (d < best) {
+        best = d;
+        bestOsm = w;
+        bestOverlay = null;
+      }
+    }
+    if (bestOverlay != null || bestOsm != null) {
+      setState(() {
+        tapped = null;
+        tappedOverlay = bestOverlay;
+        tappedOsm = bestOsm;
+      });
+      return;
+    }
     final hit = zones.where((z) => z.contains(p.latitude, p.longitude));
     final acq = shown.any((o) => o.contains(p.latitude, p.longitude));
     setState(() {
@@ -84,120 +130,120 @@ class _MapScreenState extends ConsumerState<MapScreen> {
       error: (e, _) => Center(child: Text('${t.mapLoadError}: $e')),
       data: (all) {
         final zones = all.where((z) => z.planYear == year).toList();
-        final polygons = {
+        LatLng ll(LatLngPoint p) => LatLng(p.lat, p.lng);
+        final zonePolygons = [
           for (final z in zones)
-            for (var i = 0; i < z.rings.length; i++)
+            for (final ring in z.rings)
               Polygon(
-                polygonId: PolygonId('${z.id}#$i'),
-                points: [for (final p in z.rings[i]) LatLng(p.lat, p.lng)],
-                fillColor: zoneColour(z.colour).withValues(alpha: 0.4),
-                strokeColor: zoneColour(z.colour),
-                strokeWidth: 2,
+                points: [for (final p in ring) ll(p)],
+                color: zoneColour(z.colour).withValues(alpha: 0.4),
+                borderColor: zoneColour(z.colour),
+                borderStrokeWidth: 2,
               ),
-        };
+        ];
         final plots = filterPlots(ref.watch(plotsProvider),
             ref.watch(unitRulesProvider), ref.watch(plotFiltersProvider));
         final disputes = ref.watch(disputesProvider);
         final allOverlays = ref.watch(overlaysProvider).value ?? const <MapOverlay>[];
-        final markers = {
+        final markers = [
           for (final p in plots)
             Marker(
-              markerId: MarkerId(p.id),
-              position: LatLng(p.lat, p.lng),
-              icon: switch (plotRiskLevel(p, allOverlays)) {
-                RiskLevel.inside => BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange),
-                RiskLevel.near => BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueYellow),
-                RiskLevel.none => BitmapDescriptor.defaultMarker,
-              },
-              infoWindow: InfoWindow(
-                  title: p.location,
-                  snippet: '₹ ${fmt(p.ratePerUnit)} / ${unitLabel(t, p.rateUnit)}'),
-              onTap: () => showPlotCard(context, p.id),
+              point: LatLng(p.lat, p.lng),
+              width: 44,
+              height: 44,
+              alignment: Alignment.topCenter,
+              child: GestureDetector(
+                onTap: () => showPlotCard(context, p.id),
+                child: Tooltip(
+                  message: '${p.location}  ₹ ${fmt(p.ratePerUnit)} / ${unitLabel(t, p.rateUnit)}',
+                  child: Icon(Icons.location_on, size: 44, color: switch (plotRiskLevel(p, allOverlays)) {
+                    RiskLevel.inside => Colors.deepOrange,
+                    RiskLevel.near => Colors.amber.shade700,
+                    RiskLevel.none => Theme.of(context).colorScheme.primary,
+                  }),
+                ),
+              ),
             ),
-        };
-        final circles = {
+        ];
+        final circles = [
           for (final d in disputes.where((d) => d.status == DisputeStatus.pending))
             if (plots.where((p) => p.id == d.plotId).firstOrNull case final p?)
-              Circle(
-                circleId: CircleId(d.id),
-                center: LatLng(p.lat, p.lng),
+              CircleMarker(
+                point: LatLng(p.lat, p.lng),
                 radius: 120,
-                fillColor: Colors.red.withValues(alpha: 0.25),
-                strokeColor: Colors.red,
-                strokeWidth: 3,
+                useRadiusInMeter: true,
+                color: Colors.red.withValues(alpha: 0.25),
+                borderColor: Colors.red,
+                borderStrokeWidth: 3,
               ),
-        };
-        final visible = ref.watch(visibleOverlaysProvider);
-        final shown = [
-          for (final o in ref.watch(overlaysProvider).value ?? const <MapOverlay>[])
-            if (visible.contains(o.kind)) o
         ];
-        final polylines = {
+        final visible = ref.watch(visibleOverlaysProvider);
+        final shown = [for (final o in allOverlays) if (visible.contains(o.kind)) o];
+        final overlayLines = [
           for (final o in shown.where((o) => !o.isArea))
             Polyline(
-              polylineId: PolylineId(o.id),
-              points: [for (final p in o.points) LatLng(p.lat, p.lng)],
+              points: [for (final p in o.points) ll(p)],
               color: overlayColour(o.kind),
-              width: o.kind == OverlayKind.roadWidening ? 4 : 6,
-              patterns: o.kind == OverlayKind.roadWidening
-                  ? [PatternItem.dash(20), PatternItem.gap(10)]
-                  : const [],
-              zIndex: 2,
-              consumeTapEvents: true,
-              onTap: () => setState(() {
-                tapped = null;
-                tappedOverlay = o;
-              }),
+              strokeWidth: o.kind == OverlayKind.roadWidening ? 4 : 6,
+              pattern: o.kind == OverlayKind.roadWidening
+                  ? StrokePattern.dashed(segments: const [20, 10])
+                  : const StrokePattern.solid(),
             ),
-        };
+        ];
         final osmOn = ref.watch(osmVisibleProvider);
         final osm = ref.watch(osmProvider);
-        final osmLines = {
-          if (osmOn)
-            for (final w in osm.value?.ways ?? const <OsmWay>[])
-              Polyline(
-                polylineId: PolylineId('osm-${w.id}'),
-                points: [for (final p in w.points) LatLng(p.lat, p.lng)],
-                color: osmColour(w.kind),
-                width: 3,
-                patterns: (w.kind == OsmKind.roadWorks || w.kind == OsmKind.railWorks)
-                    ? [PatternItem.dash(12), PatternItem.gap(8)]
-                    : const [],
-                zIndex: 0,
-                consumeTapEvents: true,
-                onTap: () => setState(() {
-                  tapped = null;
-                  tappedOverlay = null;
-                  tappedOsm = w;
-                }),
-              ),
-        };
-        final acqPolygons = {
+        final osmWays = osmOn ? (osm.value?.ways ?? const <OsmWay>[]) : const <OsmWay>[];
+        final osmLines = [
+          for (final w in osmWays)
+            Polyline(
+              points: [for (final p in w.points) ll(p)],
+              color: osmColour(w.kind),
+              strokeWidth: 3,
+              pattern: (w.kind == OsmKind.roadWorks || w.kind == OsmKind.railWorks)
+                  ? StrokePattern.dashed(segments: const [12, 8])
+                  : const StrokePattern.solid(),
+            ),
+        ];
+        final acqPolygons = [
           for (final o in shown.where((o) => o.isArea))
             Polygon(
-              polygonId: PolygonId(o.id),
-              points: [for (final p in o.points) LatLng(p.lat, p.lng)],
-              fillColor: overlayColour(o.kind).withValues(alpha: 0.2),
-              strokeColor: overlayColour(o.kind),
-              strokeWidth: 3,
-              zIndex: 1,
+              points: [for (final p in o.points) ll(p)],
+              color: overlayColour(o.kind).withValues(alpha: 0.2),
+              borderColor: overlayColour(o.kind),
+              borderStrokeWidth: 3,
             ),
-        };
+        ];
         final legend = {for (final z in zones) z.type(lang): z.colour};
 
         return Stack(children: [
-          GoogleMap(
-            initialCameraPosition: const CameraPosition(target: _ayodhya, zoom: 13),
-            polygons: {...polygons, ...acqPolygons},
-            polylines: {...osmLines, ...polylines},
-            markers: markers,
-            circles: circles,
-            onLongPress: (p) => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (_) => PlotForm(lat: p.latitude, lng: p.longitude))),
-            onTap: (p) => _onTap(p, zones, shown),
-            myLocationButtonEnabled: false,
+          FlutterMap(
+            mapController: _controller,
+            options: MapOptions(
+              initialCenter: _ayodhya,
+              initialZoom: 13,
+              minZoom: 5,
+              maxZoom: 19,
+              onTap: (_, p) => _onTap(p, zones, shown, osmWays),
+              onLongPress: (_, p) => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) => PlotForm(lat: p.latitude, lng: p.longitude))),
+            ),
+            children: [
+              TileLayer(
+                urlTemplate: _tileUrl,
+                userAgentPackageName: 'com.example.ayodhya_zameen',
+                maxNativeZoom: 19,
+              ),
+              PolygonLayer(polygons: [...zonePolygons, ...acqPolygons]),
+              PolylineLayer(polylines: [...osmLines, ...overlayLines]),
+              CircleLayer(circles: circles),
+              MarkerLayer(markers: markers),
+              const SimpleAttributionWidget(
+                source: Text('OpenStreetMap contributors'),
+                alignment: Alignment.bottomRight,
+              ),
+            ],
           ),
           Positioned(
             left: 8,
